@@ -1,4 +1,4 @@
-from Data.Thread import AddThread
+from src.Data.Thread import AddThread
 
 
 if __name__ == "__main__":

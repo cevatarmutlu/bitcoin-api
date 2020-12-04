@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from Server.Query import Query
+from src.Server.Query import Query
 # configuration
 DEBUG = True
 

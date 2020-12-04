@@ -1,6 +1,12 @@
 import requests
 from datetime import datetime
 
+# # API sıralaması en eski ilk, en geç son
+# api_key = 'NkUwlwYGsFq15TR8dsLNe7pxMQrR1QNb4L02a5CNOspuD3kEilHHQ6cTTCzBJCvO'
+# api_secret_key = '4tiZiRWNdWtCq3wWMdigTC88lKooRYoHMrx3yNDau71R8odddpEFh84UPqwsDjYc'
+
+# headers = {'X-MBX-APIKEY' : api_key}
+
 class CoinData:
   def __init__(self, numeratorCoins = ['ETH','BNB','XRP','BCH','LTC'], denominatorCoins = ['BTC']):
     '''

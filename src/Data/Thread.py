@@ -1,9 +1,9 @@
 import threading
-from Data.add_postgres import Data
+from src.Data.add_postgres import Data
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import time
-from Data.get_data_from_binance import CoinData
+from src.Data.get_data_from_binance import CoinData
 
 
 class AddThread (threading.Thread):
@@ -43,8 +43,8 @@ class AddThread (threading.Thread):
 
     while True:
       Data(self.db, self.coins).add()
-      time.sleep(self.sleep_time)
       print('Veri ekleme başarılı')
+      time.sleep(self.sleep_time)
 
 if __name__ == "__main__":
     thread = AddThread()
