@@ -1,5 +1,12 @@
 Çok yoruldum anca bu kadar README.md
 
+## Giriş
+
+Bu proje binance.com üzerindeki belirli Bitcoin değerlerini diğer bitcoin cinsinden elde edip 5 dakikada bir PostgresSQL veritabanına ekleyen ve eklediği verileri API olarak dışarı açan iki kısımlı bir uygulamadır.
+
+Projede PostgresSQL veritabanını Docker üzerinden edinilmiştir.
+
+
 ## Kurulum
 
 > Bu proje Ubuntu dağıtımında geliştirilmiştir. Kurulum Ubuntu dağıtımına göre yapılmıştır.
@@ -13,11 +20,11 @@ Kullanılan yapılar:
 
 ---
 
-<span style='font-size:16px'>__Docker Kurulumu__</span>
+__Docker Kurulumu__
 
   1. Öncelikle Docker' ı bilgisayara kuralım. [Link](https://docs.docker.com/engine/install/ubuntu/)
-  2. [Bu](https://docs.docker.com/engine/install/linux-postinstall/) linkteki` Post-installation steps for Linux` adımlarını da yapmanızı tavsiye ederim. Yapmazsanız Docker' ı her çalıştırdığınızda __sudo__ ile çalıştırmalısınız.
-  3. Üçüncü bir adım olarak docker-compose' u kurmalısınız: `sudo apt-get install docker-compose`
+  2. [Bu](https://docs.docker.com/engine/install/linux-postinstall/) linkteki `Post-installation steps for Linux` adımlarını da yapmanızı tavsiye ederim. Yapmazsanız Docker' ı her çalıştırdığınızda __sudo__ ile çalıştırmalısınız.
+  3. Üçüncü bir adım olarak `docker-compose`' u kurmalısınız: `sudo apt-get install docker-compose`
 
   Kurulumları gerçekleştirdikten sonra şimdi PostgresSQL' i Docker üzerinden kullanabilirsiniz. Bunun için:
 
