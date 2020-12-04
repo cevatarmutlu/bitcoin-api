@@ -9,9 +9,9 @@ services:
     ports: 
       - 5432:5432
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_PASSWORD: sade123
 
-  adminer:
+  adminer: # Postgres ve başka veritabanları için arayüz sağlıyor.
     image: adminer
     restart: always
     ports:
