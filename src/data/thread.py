@@ -1,9 +1,9 @@
 import threading
-from src.Data.add_postgres import Data
+from src.data.add_postgres import Data
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import time
-from src.Data.get_data_from_binance import CoinData
+from src.data.get_data_from_binance import CoinData
 
 
 class AddThread (threading.Thread):

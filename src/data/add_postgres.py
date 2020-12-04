@@ -1,4 +1,4 @@
-from src.Model_Coin import Coin
+from src.model.coin import Coin
 
 class Data:
   def __init__(self, db, coins):

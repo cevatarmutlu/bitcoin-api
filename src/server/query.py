@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from src.Model_Coin import Coin
+from src.model.coin import Coin
 from sqlalchemy import func
 
 class Query:

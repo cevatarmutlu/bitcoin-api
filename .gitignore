@@ -139,6 +139,3 @@ cython_debug/
 
 
 .vscode/
-
-app.py
-binance.py
