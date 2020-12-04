@@ -15,11 +15,18 @@ query = Query(db)
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
 
-@app.route('/values', methods=['get'])
+@app.route('/', methods=['GET'])
+def root():
+  return jsonify({
+    '/values': '5dklik degerlerinin Json olarak sunulmasi',
+    '/avg': 'ortalama degerinin sunulmasi'
+  })
+
+@app.route('/values', methods=['GET'])
 def fiveMinutes():
   return jsonify(query.coin_values())
 
-@app.route('/avg', methods=['get'])
+@app.route('/avg', methods=['GET'])
 def oneHour():
   return jsonify(query.coin_avg())
 
