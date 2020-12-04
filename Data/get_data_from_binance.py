@@ -23,7 +23,6 @@ class CoinData:
     self.symbols = self.generateSymbols()
 
   def generateSymbols(self):
-
     '''
       İstek atılacak symbol' ları oluşturan fonksiyondur.
 
