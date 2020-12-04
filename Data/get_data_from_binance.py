@@ -4,7 +4,8 @@ from datetime import datetime
 class CoinData:
   def __init__(self, numeratorCoins = ['ETH','BNB','XRP','BCH','LTC'], denominatorCoins = ['BTC']):
     '''
-      CoinData class' ı belirli bitcoinlerin diğer bitcoinler cinsinden değerlerini elde etme görevi olan class.
+      CoinData class' ı binance.com API' yına istek atarak belirli bitcoinlerin diğer bitcoinler cinsinden 
+      değerlerini elde etme görevi olan class.
 
       init parametreleri: 
         @numeratorsCoins: Dizi, Bu parametre ETH/BTC karşılatırılmasındaki ilk kısımları tutan değişkendir. Numerator pay demektir. Default değeri ['ETH','BNB','XRP','BCH','LTC'].
