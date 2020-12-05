@@ -1,7 +1,8 @@
 from flask import Flask, jsonify, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from src.server.query import Query
+from src.api.query import Query
+
 # configuration
 DEBUG = True
 
@@ -14,6 +15,8 @@ query = Query(db)
 
 # enable CORS
 CORS(app, resources={r'/*': {'origins': '*'}})
+
+
 
 @app.route('/', methods=['GET'])
 def root():
@@ -29,6 +32,7 @@ def fiveMinutes():
 @app.route('/avg', methods=['GET'])
 def oneHour():
   return jsonify(query.coin_avg())
+
 
 
 if __name__ == '__main__':
