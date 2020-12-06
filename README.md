@@ -1,6 +1,19 @@
 ## Giriş
 
-Bu proje binance.com üzerindeki belirli Bitcoin değerlerini elde edip 5 dakikada bir PostgresSQL veritabanına ekleyen ve eklediği verileri API olarak dışarı açan iki kısımlı bir uygulamadır.
+Bu proje binance.com üzerindeki bütün Bitcoin çiftlerinin değerlerini elde edip 5 dakikada bir PostgresSQL veritabanına ekleyen ve eklediği verileri API olarak dışarı açan iki kısımlı bir uygulamadır.
+
+## İşlem adımları
+
+- Veri ekleme işleminde: Bütün bitcoin çiftlerinin isimleri ile değerli elde edilir ve veritabanına eklenir.
+- Veritabanından sadece ETH/BTC çiftinin 15 dk içindeki 5dklık değerlerinin Json olarak sunulur. Ayrıca ETH/BTC nin son 60 dk içindeki ortalama değeri sunulur. Ek olarak bütün çiftlerin değeleri sunurlur.
+
+## Kullanılması
+
+İki ayrı yapı şeklinde çalışmaktadır. İki ayrı terminal üzerinden çalıştırabilirsiniz.
+
+Verileri 5dk'a kadar bir veritabanına eklemek için `add.py`.
+
+API için `api.py` dosyasını çalıştırınız. (localhost:5000)
 
 ## Kurulum
 
@@ -38,11 +51,3 @@ __Python ve PostgresSQL ile python' ın haberleşmesi için gerekenler__
 
     sudo apt-get install libpq-dev
     pip install -r requirenments.txt
-
-## Kullanılması
-
-İki ayrı yapı şeklinde çalışmaktadır. İki ayrı terminal üzerinden çalıştırabilirsiniz.
-
-Verileri 5dk'a kadar bir veritabanına eklemek için `add.py`.
-
-API için `api.py` dosyasını çalıştırınız. (localhost:5000)

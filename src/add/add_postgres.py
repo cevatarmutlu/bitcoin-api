@@ -1,4 +1,5 @@
 from src.model.coin import Coin
+from datetime import datetime
 
 class Data:
   """Uygun isim aklıma gelmeyen Data class' ının vazifesi PostgresSQL' e veri eklemektir.
@@ -24,12 +25,13 @@ class Data:
           Return değeri yoktur.
           
     '''
-    for coin in self.coins:
+    for i, coin in enumerate(self.coins):
       row = Coin(
         symbol=coin.get('symbol'),
         price=coin.get('price'),
-        timestamp=coin.get('timestamp')
+        timestamp=datetime.now()
       )
       self.db.session.add(row)
     self.db.session.commit() # Ekleme işlemini gerçekleştirir.
+    print("Veriler veritabanına eklendi\n")
   

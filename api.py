@@ -22,7 +22,8 @@ CORS(app, resources={r'/*': {'origins': '*'}})
 def root():
   return jsonify({
     '/values': '5dklik degerlerinin Json olarak sunulmasi',
-    '/avg': 'ortalama degerinin sunulmasi'
+    '/avg': 'ortalama degerinin sunulmasi',
+    '/all': 'Bitcoin degerlerinin hepsini return eder.'
   })
 
 @app.route('/values', methods=['GET'])
@@ -33,6 +34,9 @@ def fiveMinutes():
 def oneHour():
   return jsonify(query.coin_avg())
 
+@app.route('/all', methods=['GET'])
+def all_data():
+  return jsonify(query.all_coin_values())
 
 
 if __name__ == '__main__':

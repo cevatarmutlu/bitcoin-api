@@ -20,14 +20,12 @@ class AddThread (threading.Thread):
               SQLAlchemy nesnesi bir Flask nesnesine ve Flask nesnesinin config['SQLALCHEMY_DATABASE_URI'] 
               değerinin atanmasına ihtiyaç duyuyor. Hızlıca bitirmek için üzerine düşünmedim.
           db (Nesne): Veritabanı işlemlerini gerçekleştirir.
-          coins (Dizi): API' dan gelen velen verileri tutar.
           sleep_time (Integer): Periyot süresi. 5 dakika
     '''
 
     self.app = Flask(__name__)
     self.app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:sade123@localhost:5432/postgres'
     self.db = SQLAlchemy(self.app)
-    self.coins = CoinData().get()
     self.sleep_time = 60 * 5 # 5 dakika
 
   def run(self):
@@ -43,8 +41,8 @@ class AddThread (threading.Thread):
     '''
 
     while True:
-      Data(self.db, self.coins).add()
-      print('Veri ekleme başarılı')
+      coins = CoinData().get()
+      Data(self.db, coins).add()
       time.sleep(self.sleep_time)
 
 if __name__ == "__main__":

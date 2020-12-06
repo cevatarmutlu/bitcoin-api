@@ -13,14 +13,27 @@ class Query:
   def __init__(self, db):
     
     self.db = db
+  
+  def all_coin_values(self):
+    """
+        Bütün bitcoin çiftlerinin değerlerini döndüren fonksiyon.
+
+    Args:
+        Argüman almaz.
+
+    Return:
+        (Dizi): Veritabanından gelen cevabı belli formata sokarak döndürür.
+    """
+    query = self.db.session.query(Coin).all()
+    return [{'symbol': i.symbol,'price': i.price,'timestamp': i.timestamp} for i in query]
     
-  def coin_values(self, numerator='ETH', denominator='BTC', minute=15):
+  def coin_values(self, base='ETH', quote='BTC', minute=15):
     '''
       Şuanki zaman ile belirli bir geçmiş dakika arasındaki bitcoinlerin değerlerini döndürür.
 
       Args:
-          numerator (String): ETC/BTC değerinin pay kısmı olmaktadır.
-          denominator (String): ETC/BTC değerinin payda kısmı olmaktadır.
+          base (String): ETC/BTC değerinin pay kısmı olmaktadır.
+          quote (String): ETC/BTC değerinin payda kısmı olmaktadır.
           minute (Integer): Şuanki zamandan kaç dakika geriye gidileceğini belirtir.
 
       Return:
@@ -37,7 +50,7 @@ class Query:
 
     beforeTime = timedelta(minutes=minute)
     time = datetime.now() - beforeTime
-    symbol = f'{numerator}{denominator}'
+    symbol = f'{base}{quote}'
     
     query = self.db.session.query(Coin).filter(Coin.symbol == symbol).filter(Coin.timestamp >= time).all()
     # Yukarıdaki sorgu: Coin tablosunda, symbol değeri `symbol` değişkenine eşit olan ve 
@@ -45,13 +58,13 @@ class Query:
 
     return [{'symbol': i.symbol,'price': i.price,'timestamp': i.timestamp} for i in query]
 
-  def coin_avg(self, numerator='ETH', denominator='BTC', hour=1):
+  def coin_avg(self, base='ETH', quote='BTC', hour=1):
     '''
       Şuanki zaman ile belirli bir geçmiş saat arasındaki coin karşılaştırılmasının ortalamasını döndürür.
 
       Args:
-          numerator (String): ETC/BTC değerinin pay kısmı olmaktadır.
-          denominator (String): ETC/BTC değerinin payda kısmı olmaktadır.
+          base (String): ETC/BTC değerinin pay kısmı olmaktadır.
+          quote (String): ETC/BTC değerinin payda kısmı olmaktadır.
           hour (Integer): Şuanki zamandan kaç saat geriye gidileceğini belirtir.
 
       Return:
@@ -68,9 +81,9 @@ class Query:
 
     beforeTime = timedelta(hours=hour)
     time = datetime.now() - beforeTime
-    symbol = f'{numerator}{denominator}'
+    symbol = f'{base}{quote}'
 
-    query = self.db.session.query(func.avg(Coin.price)).filter(Coin.symbol == "ETHBTC").filter(Coin.timestamp >= time).all()
+    query = self.db.session.query(func.avg(Coin.price)).filter(Coin.symbol == symbol).filter(Coin.timestamp >= time).all()
     # Yukarıdaki sorgu: Coin tablosunda, symbol değeri `symbol` değişkenine eşit olan ve 
     # timestamp değeri ise `time` değişkeninden büyük olan satırların
     # price kolonlarının ortalamasını al demektir.
