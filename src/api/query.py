@@ -53,16 +53,16 @@ class Query:
     except:
       time = 15
 
-    beforeTime = timedelta(minutes=float(time))
-    time = datetime.now() - beforeTime
+    beforeTime = timedelta(minutes=time)
+    req_time = datetime.now() - beforeTime
     
-    query = self.db.session.query(Coin).filter(Coin.symbol == symbol).filter(Coin.timestamp >= time).all()
+    query = self.db.session.query(Coin).filter(Coin.symbol == symbol).filter(Coin.timestamp >= req_time).all()
     # Yukarıdaki sorgu: Coin tablosunda, symbol değeri `symbol` değişkenine eşit olan ve 
     # timestamp değeri ise `time` değişkeninden büyük olan satırları getir demektir.
 
     return [{'symbol': i.symbol,'price': i.price,'timestamp': i.timestamp} for i in query]
 
-  def coin_avg(self, base='ETH', quote='BTC', hour=1):
+  def coin_avg(self, symbol, time=1):
     '''
       Şuanki zaman ile belirli bir geçmiş saat arasındaki coin karşılaştırılmasının ortalamasını döndürür.
 
@@ -83,17 +83,21 @@ class Query:
         query: Veritabanı sorgusundan gelen cevabı tutar.
     '''
 
-    beforeTime = timedelta(hours=hour)
-    time = datetime.now() - beforeTime
-    symbol = f'{base}{quote}'
+    try:
+      time = float(time)
+    except:
+      time = 15
 
-    query = self.db.session.query(func.avg(Coin.price)).filter(Coin.symbol == symbol).filter(Coin.timestamp >= time).all()
+    beforeTime = timedelta(hours=time)
+    req_time = datetime.now() - beforeTime
+
+    query = self.db.session.query(func.avg(Coin.price)).filter(Coin.symbol == symbol).filter(Coin.timestamp >= req_time).all()
     # Yukarıdaki sorgu: Coin tablosunda, symbol değeri `symbol` değişkenine eşit olan ve 
     # timestamp değeri ise `time` değişkeninden büyük olan satırların
     # price kolonlarının ortalamasını al demektir.
 
     return {
-      'symbol': 'ETCBTC',
-      'hour': '1',
+      'symbol': symbol,
+      'hour': req_time,
       'avg': query[0][0],
     }

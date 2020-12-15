@@ -34,7 +34,9 @@ def fiveMinutes():
 
 @app.route('/avg', methods=['GET'])
 def oneHour():
-  return jsonify(query.coin_avg())
+  symbol = request.args.get("symbol", "ETHBTC")
+  time =  request.args.get("time", 1)
+  return jsonify(query.coin_avg(symbol=symbol, time=time))
 
 @app.route('/all', methods=['GET'])
 def all_data():
