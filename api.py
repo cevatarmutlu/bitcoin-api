@@ -28,7 +28,9 @@ def root():
 
 @app.route('/values', methods=['GET'])
 def fiveMinutes():
-  return jsonify(query.coin_values())
+  symbol = request.args.get("symbol", "ETHBTC")
+  time =  request.args.get("time", 15)
+  return jsonify(query.coin_values(symbol=symbol, time=time))
 
 @app.route('/avg', methods=['GET'])
 def oneHour():

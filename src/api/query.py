@@ -27,7 +27,7 @@ class Query:
     query = self.db.session.query(Coin).all()
     return [{'symbol': i.symbol,'price': i.price,'timestamp': i.timestamp} for i in query]
     
-  def coin_values(self, base='ETH', quote='BTC', minute=15):
+  def coin_values(self, symbol, time=15):
     '''
       Şuanki zaman ile belirli bir geçmiş dakika arasındaki bitcoinlerin değerlerini döndürür.
 
@@ -48,9 +48,13 @@ class Query:
         query: Veritabanı sorgusundan gelen cevabı tutar.
     '''
 
-    beforeTime = timedelta(minutes=minute)
+    try:
+      time = float(time)
+    except:
+      time = 15
+
+    beforeTime = timedelta(minutes=float(time))
     time = datetime.now() - beforeTime
-    symbol = f'{base}{quote}'
     
     query = self.db.session.query(Coin).filter(Coin.symbol == symbol).filter(Coin.timestamp >= time).all()
     # Yukarıdaki sorgu: Coin tablosunda, symbol değeri `symbol` değişkenine eşit olan ve 
